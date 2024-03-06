@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutorial_spotlight/spotlight_controller.dart';
+import 'package:tutorial_spotlight/spotlight_overlay.dart';
 
 class SpotlightHolder extends StatelessWidget {
   final SpotlightController controller;
@@ -20,9 +21,14 @@ class SpotlightHolder extends StatelessWidget {
           return Stack(
             children: [
               child,
-              // TODO: Add the spotlight painter
-              // TODO: Add the spotlight tooltip here
-              if (controller.activeTooltip != null) controller.activeTooltip!,
+              SpotlightOverlay(
+                targetKey: controller.currentKey,
+                borderRadius: controller.activeConfig?.borderRadius,
+              ),
+
+              // TODO: Position the tooltip
+              if (controller.activeConfig?.tooltip != null)
+                controller.activeConfig!.tooltip(controller),
             ],
           );
         } else {

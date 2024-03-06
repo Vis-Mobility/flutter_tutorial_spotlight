@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tutorial_spotlight/spotlight_controller.dart';
+import 'package:tutorial_spotlight/spotlight_item_config.dart';
 
 class SpotlightItem extends StatelessWidget {
-  final Widget Function(SpotlightController) tooltip;
+  final SpotlightItemConfig config;
   final Widget child;
 
   const SpotlightItem({
     Key? key,
-    required this.tooltip,
+    required this.config,
     required this.child,
   }) : super(key: key);
 

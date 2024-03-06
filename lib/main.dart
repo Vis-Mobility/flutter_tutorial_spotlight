@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tutorial_spotlight/spotlight_controller.dart';
 import 'package:tutorial_spotlight/spotlight_item.dart';
 import 'package:tutorial_spotlight/spotlight_holder.dart';
+import 'package:tutorial_spotlight/spotlight_item_config.dart';
 import 'package:tutorial_spotlight/spotlight_tooltip.dart';
 
 final GlobalKey _one = GlobalKey();
@@ -30,29 +31,43 @@ class MainApp extends StatelessWidget {
                 children: [
                   SpotlightItem(
                     key: _one,
-                    tooltip: (controller) => SpotlightTooltip(
+                    config: SpotlightItemConfig(
+                      tooltip: (controller) => SpotlightTooltip(
                         controller: controller,
                         title: 'ONE',
                         description: 'description1',
                         image: '',
                         step: 1,
-                        totalSteps: 3),
+                        totalSteps: 3,
+                      ),
+                      borderRadius: 10.0,
+                    ),
                     child: Text('Text 1'),
                   ),
                   SpotlightItem(
                     key: _two,
-                    tooltip: (controller) => SpotlightTooltip(
-                        controller: controller,
-                        title: 'TWO',
-                        description: 'description2',
-                        image: '',
-                        step: 2,
-                        totalSteps: 3),
+                    config: SpotlightItemConfig(
+                      tooltip: (controller) => SpotlightTooltip(
+                          controller: controller,
+                          title: 'TWO',
+                          description: 'description2',
+                          image: '',
+                          step: 2,
+                          totalSteps: 3),
+                    ),
                     child: Text('Text 2'),
                   ),
                   SpotlightItem(
                     key: _three,
-                    tooltip: (controller) => Container(),
+                    config: SpotlightItemConfig(
+                      tooltip: (controller) => SpotlightTooltip(
+                          controller: controller,
+                          title: 'THREE',
+                          description: 'description3',
+                          image: '',
+                          step: 3,
+                          totalSteps: 3),
+                    ),
                     child: Text('Text 3'),
                   ),
                 ],

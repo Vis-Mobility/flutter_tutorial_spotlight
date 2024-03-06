@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:tutorial_spotlight/spotlight_item.dart';
+import 'package:tutorial_spotlight/spotlight_item_config.dart';
 
 class SpotlightController extends ChangeNotifier {
   bool isActive = false;
-  Widget? activeTooltip;
+  SpotlightItemConfig? activeConfig;
   List<GlobalKey> widgetKeys = [];
 
   int currentIndex = 0;
+
+  GlobalKey get currentKey => widgetKeys[currentIndex];
 
   void start(List<GlobalKey> keys) {
     widgetKeys = keys;
@@ -36,7 +39,7 @@ class SpotlightController extends ChangeNotifier {
   void _updateActive() {
     final currentWidget = widgetKeys[currentIndex].currentWidget;
     if (currentWidget is SpotlightItem) {
-      activeTooltip = currentWidget.tooltip(this);
+      activeConfig = currentWidget.config;
     }
   }
 }
