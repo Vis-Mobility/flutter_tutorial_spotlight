@@ -26,6 +26,7 @@ class SpotlightItemConfig {
   final double tooltipVerticalOffset;
   final SpotlightTooltipHorizontalPosition tooltipHorizontalPosition;
   final double tooltipHorizontalOffset;
+  final bool showSpotlight;
 
   const SpotlightItemConfig({
     required this.tooltip,
@@ -35,6 +36,7 @@ class SpotlightItemConfig {
     this.tooltipVerticalOffset = 0,
     this.tooltipHorizontalPosition = SpotlightTooltipHorizontalPosition.center,
     this.tooltipHorizontalOffset = 0,
+    this.showSpotlight = true,
   });
 }
 

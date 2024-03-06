@@ -10,6 +10,7 @@ class SpotlightTooltip extends StatelessWidget {
   final String title;
   final String description;
   final String image;
+  final bool showSteps;
   final int step;
   final int totalSteps;
   final SpotlightTooltipArrowDirection arrowDirection;
@@ -24,6 +25,7 @@ class SpotlightTooltip extends StatelessWidget {
     required this.title,
     required this.description,
     required this.image,
+    this.showSteps = true,
     required this.step,
     required this.totalSteps,
     this.arrowDirection = SpotlightTooltipArrowDirection.none,
@@ -73,18 +75,7 @@ class SpotlightTooltip extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 6),
-                      if (totalSteps > 1)
-                        SmoothPageIndicator(
-                          controller: PageController(initialPage: step - 1),
-                          count: totalSteps,
-                          effect: ColorTransitionEffect(
-                            dotWidth: 8,
-                            dotHeight: 8,
-                            activeDotColor: Colors.blue.shade700,
-                            dotColor: Colors.grey.shade300,
-                            spacing: 7,
-                          ),
-                        ),
+                      _pageIndicator(context),
                       const SizedBox(height: 10),
                       _actionButton(context),
                       _dismissButton(context),
@@ -105,6 +96,26 @@ class SpotlightTooltip extends StatelessWidget {
             ),
           ),
       ],
+    );
+  }
+
+  Widget _pageIndicator(BuildContext context) {
+    return SizedBox(
+      height: 8,
+      child: Visibility(
+        visible: totalSteps > 1 && showSteps,
+        child: SmoothPageIndicator(
+          controller: PageController(initialPage: step - 1),
+          count: totalSteps,
+          effect: ColorTransitionEffect(
+            dotWidth: 8,
+            dotHeight: 8,
+            activeDotColor: Colors.blue.shade700,
+            dotColor: Colors.grey.shade300,
+            spacing: 7,
+          ),
+        ),
+      ),
     );
   }
 
