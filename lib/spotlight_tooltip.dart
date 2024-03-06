@@ -85,8 +85,6 @@ class SpotlightTooltip extends StatelessWidget {
       child: FilledButton(
         child: Text(step == totalSteps ? 'Done' : 'Next'),
         onPressed: () {
-          // if (step == totalSteps) {
-          // } else {}
           controller.next();
         },
       ),

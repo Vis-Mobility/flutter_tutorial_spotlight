@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tutorial_spotlight/spotlight_controller.dart';
 import 'package:tutorial_spotlight/spotlight_item.dart';
 import 'package:tutorial_spotlight/spotlight_holder.dart';
-import 'package:tutorial_spotlight/spotlight_item_config.dart';
 import 'package:tutorial_spotlight/spotlight_tooltip.dart';
 
 final GlobalKey _one = GlobalKey();
@@ -40,6 +39,7 @@ class MainApp extends StatelessWidget {
                         step: 1,
                         totalSteps: 3,
                       ),
+                      padding: EdgeInsets.all(8.0),
                       borderRadius: 10.0,
                     ),
                     child: Text('Text 1'),

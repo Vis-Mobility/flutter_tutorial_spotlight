@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tutorial_spotlight/spotlight_item.dart';
-import 'package:tutorial_spotlight/spotlight_item_config.dart';
 
 class SpotlightController extends ChangeNotifier {
   bool isActive = false;
@@ -33,6 +32,8 @@ class SpotlightController extends ChangeNotifier {
       _updateActive();
 
       notifyListeners();
+    } else {
+      dismiss();
     }
   }
 
