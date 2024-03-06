@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tutorial_spotlight/enums.dart';
 import 'package:tutorial_spotlight/spotlight_controller.dart';
 
 class SpotlightItem extends StatelessWidget {
@@ -22,13 +23,15 @@ class SpotlightItemConfig {
   final EdgeInsets? padding;
   final double? borderRadius;
   final SpotlightTooltipVerticalPosition tooltipVerticalPosition;
+  final SpotlightTooltipHorizontalPosition tooltipHorizontalPosition;
+  final double? tooltipHorizontalOffset;
 
   const SpotlightItemConfig({
     required this.tooltip,
     this.padding,
     this.borderRadius,
     this.tooltipVerticalPosition = SpotlightTooltipVerticalPosition.automatic,
+    this.tooltipHorizontalPosition = SpotlightTooltipHorizontalPosition.center,
+    this.tooltipHorizontalOffset,
   });
 }
-
-enum SpotlightTooltipVerticalPosition { top, bottom, automatic }

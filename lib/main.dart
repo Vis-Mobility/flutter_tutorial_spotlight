@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tutorial_spotlight/enums.dart';
 import 'package:tutorial_spotlight/spotlight_controller.dart';
 import 'package:tutorial_spotlight/spotlight_item.dart';
 import 'package:tutorial_spotlight/spotlight_holder.dart';
@@ -7,6 +8,8 @@ import 'package:tutorial_spotlight/spotlight_tooltip.dart';
 final GlobalKey _one = GlobalKey();
 final GlobalKey _two = GlobalKey();
 final GlobalKey _three = GlobalKey();
+final GlobalKey _four = GlobalKey();
+final GlobalKey _five = GlobalKey();
 final SpotlightController controller = SpotlightController();
 
 void main() {
@@ -70,13 +73,52 @@ class MainApp extends StatelessWidget {
                     ),
                     child: Text('Text 3'),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const SizedBox(width: 30),
+                      SpotlightItem(
+                        key: _four,
+                        config: SpotlightItemConfig(
+                          tooltip: (controller) => SpotlightTooltip(
+                              controller: controller,
+                              title: 'FOUR',
+                              description: 'description4',
+                              image: '',
+                              step: 4,
+                              totalSteps: 5),
+                          tooltipHorizontalPosition:
+                              SpotlightTooltipHorizontalPosition.alignLeft,
+                        ),
+                        child: Text('Text 4'),
+                      ),
+                      const Spacer(),
+                      SpotlightItem(
+                        key: _five,
+                        config: SpotlightItemConfig(
+                          tooltip: (controller) => SpotlightTooltip(
+                              controller: controller,
+                              title: 'FIVE',
+                              description: 'description5',
+                              image: '',
+                              step: 5,
+                              totalSteps: 5),
+                          tooltipHorizontalPosition:
+                              SpotlightTooltipHorizontalPosition.alignRight,
+                        ),
+                        child: Text('Text 5'),
+                      ),
+                      const SizedBox(width: 30),
+                    ],
+                  ),
                 ],
               ),
             ),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              controller.start([_one, _two, _three]);
+              // controller.start([_one, _two, _three, _four, _five]);
+              controller.start([_three, _four, _five]);
             },
             child: const Icon(Icons.play_arrow),
           ),

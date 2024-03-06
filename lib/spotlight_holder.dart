@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tutorial_spotlight/enums.dart';
 import 'package:tutorial_spotlight/spotlight_controller.dart';
 import 'package:tutorial_spotlight/spotlight_item.dart';
 import 'package:tutorial_spotlight/spotlight_overlay.dart';
@@ -48,88 +49,42 @@ class SpotlightHolder extends StatelessWidget {
     final tooltip = config.tooltip;
     final (offset, size) =
         WidgetPosition.getOffsetAndSize(controller.currentKey);
+    double? left;
+    double? top;
+    double? right;
+    double? bottom;
 
-    switch (config.tooltipVerticalPosition) {
-      case SpotlightTooltipVerticalPosition.top:
-        return _buildTooltipTop(
-          context,
-          tooltip: tooltip,
-          padding: config.padding,
-          offset: offset,
-          size: size,
-        );
-      case SpotlightTooltipVerticalPosition.bottom:
-        return _buildTooltipBottom(
-          tooltip: tooltip,
-          padding: config.padding,
-          offset: offset,
-          size: size,
-        );
-      case SpotlightTooltipVerticalPosition.automatic:
-        return _buildTooltipAutomatic(
-          context,
-          tooltip: tooltip,
-          offset: offset,
-          size: size,
-        );
-    }
-  }
-
-  Widget _buildTooltipTop(
-    BuildContext context, {
-    required Widget Function(SpotlightController) tooltip,
-    EdgeInsets? padding,
-    required Offset offset,
-    required Size size,
-  }) {
-    final bottom = MediaQuery.of(context).size.height - offset.dy;
-    return Positioned(
-      left: offset.dx,
-      bottom: bottom,
-      child: tooltip(controller),
-    );
-  }
-
-  Widget _buildTooltipBottom({
-    required Widget Function(SpotlightController) tooltip,
-    EdgeInsets? padding,
-    required Offset offset,
-    required Size size,
-  }) {
-    final tooltipPosition = Offset(offset.dx, offset.dy + size.height);
-
-    return Positioned(
-      top: tooltipPosition.dy,
-      left: tooltipPosition.dx,
-      child: tooltip(controller),
-    );
-  }
-
-  Widget _buildTooltipAutomatic(
-    BuildContext context, {
-    required Widget Function(SpotlightController) tooltip,
-    EdgeInsets? padding,
-    required Offset offset,
-    required Size size,
-  }) {
     final targetVerticalCenter = offset.dy + size.height / 2;
     final screenVerticalCenter = MediaQuery.of(context).size.height / 2;
+    final isTop = config.tooltipVerticalPosition ==
+            SpotlightTooltipVerticalPosition.top ||
+        config.tooltipVerticalPosition ==
+                SpotlightTooltipVerticalPosition.automatic &&
+            targetVerticalCenter > screenVerticalCenter;
 
-    if (targetVerticalCenter > screenVerticalCenter) {
-      return _buildTooltipTop(
-        context,
-        tooltip: tooltip,
-        padding: padding,
-        offset: offset,
-        size: size,
-      );
+    if (isTop) {
+      bottom = MediaQuery.of(context).size.height - offset.dy;
     } else {
-      return _buildTooltipBottom(
-        tooltip: tooltip,
-        padding: padding,
-        offset: offset,
-        size: size,
-      );
+      final bottomPadding = config.padding?.bottom ?? 0;
+      top = offset.dy + size.height + bottomPadding;
     }
+
+    switch (config.tooltipHorizontalPosition) {
+      case SpotlightTooltipHorizontalPosition.alignLeft:
+        left = offset.dx;
+      case SpotlightTooltipHorizontalPosition.alignRight:
+        right = MediaQuery.of(context).size.width - size.width - offset.dx;
+      case SpotlightTooltipHorizontalPosition.center:
+        left = 0;
+        right = 0;
+    }
+
+    return Positioned(
+      left: left,
+      top: top,
+      right: right,
+      bottom: bottom,
+      child: Center(child: tooltip(controller)),
+    );
   }
 }
