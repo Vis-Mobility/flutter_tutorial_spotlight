@@ -19,19 +19,37 @@ class SpotlightItem extends StatelessWidget {
 }
 
 class SpotlightItemConfig {
-  final Widget Function(SpotlightController) tooltip;
-  final EdgeInsets? padding;
-  final double? borderRadius;
+  final Widget Function(SpotlightController, SpotlightTooltipPosition) tooltip;
+  final EdgeInsets padding;
+  final double borderRadius;
   final SpotlightTooltipVerticalPosition tooltipVerticalPosition;
+  final double tooltipVerticalOffset;
   final SpotlightTooltipHorizontalPosition tooltipHorizontalPosition;
-  final double? tooltipHorizontalOffset;
+  final double tooltipHorizontalOffset;
 
   const SpotlightItemConfig({
     required this.tooltip,
-    this.padding,
-    this.borderRadius,
+    this.padding = EdgeInsets.zero,
+    this.borderRadius = 0.0,
     this.tooltipVerticalPosition = SpotlightTooltipVerticalPosition.automatic,
+    this.tooltipVerticalOffset = 0,
     this.tooltipHorizontalPosition = SpotlightTooltipHorizontalPosition.center,
-    this.tooltipHorizontalOffset,
+    this.tooltipHorizontalOffset = 0,
+  });
+}
+
+class SpotlightTooltipPosition {
+  final Offset? pointTo;
+  final double? left;
+  final double? top;
+  final double? right;
+  final double? bottom;
+
+  const SpotlightTooltipPosition({
+    this.pointTo,
+    this.left,
+    this.top,
+    this.right,
+    this.bottom,
   });
 }

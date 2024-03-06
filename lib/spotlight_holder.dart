@@ -62,29 +62,46 @@ class SpotlightHolder extends StatelessWidget {
                 SpotlightTooltipVerticalPosition.automatic &&
             targetVerticalCenter > screenVerticalCenter;
 
+    final topPadding = config.padding.top;
+    final bottomPadding = config.padding.bottom;
     if (isTop) {
-      bottom = MediaQuery.of(context).size.height - offset.dy;
+      bottom = MediaQuery.of(context).size.height -
+          offset.dy +
+          topPadding +
+          config.tooltipVerticalOffset;
     } else {
-      final bottomPadding = config.padding?.bottom ?? 0;
-      top = offset.dy + size.height + bottomPadding;
+      top = offset.dy +
+          size.height +
+          bottomPadding +
+          config.tooltipVerticalOffset;
     }
 
     switch (config.tooltipHorizontalPosition) {
       case SpotlightTooltipHorizontalPosition.alignLeft:
-        left = offset.dx;
+        left = offset.dx - config.tooltipHorizontalOffset;
       case SpotlightTooltipHorizontalPosition.alignRight:
-        right = MediaQuery.of(context).size.width - size.width - offset.dx;
+        right = MediaQuery.of(context).size.width -
+            size.width -
+            offset.dx -
+            config.tooltipHorizontalOffset;
       case SpotlightTooltipHorizontalPosition.center:
-        left = 0;
-        right = 0;
+        left = config.tooltipHorizontalOffset;
+        right = left;
     }
 
-    return Positioned(
+    final pointTo = Offset(
+      offset.dx + size.width / 2,
+      isTop ? offset.dy - topPadding : offset.dy + size.height + bottomPadding,
+    );
+
+    final SpotlightTooltipPosition tooltipPosition = SpotlightTooltipPosition(
+      pointTo: pointTo,
       left: left,
       top: top,
       right: right,
       bottom: bottom,
-      child: Center(child: tooltip(controller)),
     );
+
+    return tooltip(controller, tooltipPosition);
   }
 }

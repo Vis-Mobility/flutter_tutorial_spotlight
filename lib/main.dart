@@ -3,8 +3,10 @@ import 'package:tutorial_spotlight/enums.dart';
 import 'package:tutorial_spotlight/spotlight_controller.dart';
 import 'package:tutorial_spotlight/spotlight_item.dart';
 import 'package:tutorial_spotlight/spotlight_holder.dart';
-import 'package:tutorial_spotlight/spotlight_tooltip.dart';
+import 'package:tutorial_spotlight/tooltip/spotlight_tooltip.dart';
+import 'package:tutorial_spotlight/tooltip/spotlight_tooltip_arrow.dart';
 
+final GlobalKey _zero = GlobalKey();
 final GlobalKey _one = GlobalKey();
 final GlobalKey _two = GlobalKey();
 final GlobalKey _three = GlobalKey();
@@ -13,11 +15,20 @@ final GlobalKey _five = GlobalKey();
 final SpotlightController controller = SpotlightController();
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final spotlightItems = [
+    _zero,
+    _one,
+    _two,
+    _three,
+    _four,
+    _five,
+  ];
+
+  MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,42 +45,59 @@ class MainApp extends StatelessWidget {
                   SpotlightItem(
                     key: _one,
                     config: SpotlightItemConfig(
-                      tooltip: (controller) => SpotlightTooltip(
+                      tooltip: (controller, tooltipPosition) =>
+                          SpotlightTooltip(
                         controller: controller,
+                        position: tooltipPosition,
                         title: 'ONE',
                         description: 'description1',
                         image: '',
-                        step: 1,
-                        totalSteps: 3,
+                        step: spotlightItems.indexOf(_one) + 1,
+                        totalSteps: spotlightItems.length,
+                        arrowDirection: SpotlightTooltipArrowDirection.up,
                       ),
                       padding: EdgeInsets.all(8.0),
                       borderRadius: 10.0,
+                      tooltipVerticalOffset: 10,
                     ),
                     child: Text('Text 1'),
                   ),
                   SpotlightItem(
                     key: _two,
                     config: SpotlightItemConfig(
-                      tooltip: (controller) => SpotlightTooltip(
-                          controller: controller,
-                          title: 'TWO',
-                          description: 'description2',
-                          image: '',
-                          step: 2,
-                          totalSteps: 3),
+                      tooltip: (controller, tooltipPosition) =>
+                          SpotlightTooltip(
+                        controller: controller,
+                        position: tooltipPosition,
+                        title: 'TWO',
+                        description: 'description2',
+                        image: '',
+                        step: spotlightItems.indexOf(_two) + 1,
+                        totalSteps: spotlightItems.length,
+                        arrowDirection: SpotlightTooltipArrowDirection.up,
+                      ),
+                      padding: EdgeInsets.all(8.0),
+                      borderRadius: 10.0,
+                      tooltipVerticalOffset: 10,
                     ),
                     child: Text('Text 2'),
                   ),
                   SpotlightItem(
                     key: _three,
                     config: SpotlightItemConfig(
-                      tooltip: (controller) => SpotlightTooltip(
-                          controller: controller,
-                          title: 'THREE',
-                          description: 'description3',
-                          image: '',
-                          step: 3,
-                          totalSteps: 3),
+                      tooltip: (controller, builder) => SpotlightTooltip(
+                        controller: controller,
+                        position: builder,
+                        title: 'THREE',
+                        description: 'description3',
+                        image: '',
+                        step: spotlightItems.indexOf(_three) + 1,
+                        totalSteps: spotlightItems.length,
+                        arrowDirection: SpotlightTooltipArrowDirection.down,
+                      ),
+                      padding: EdgeInsets.all(8.0),
+                      borderRadius: 10.0,
+                      tooltipVerticalOffset: 10,
                     ),
                     child: Text('Text 3'),
                   ),
@@ -80,15 +108,23 @@ class MainApp extends StatelessWidget {
                       SpotlightItem(
                         key: _four,
                         config: SpotlightItemConfig(
-                          tooltip: (controller) => SpotlightTooltip(
-                              controller: controller,
-                              title: 'FOUR',
-                              description: 'description4',
-                              image: '',
-                              step: 4,
-                              totalSteps: 5),
+                          tooltip: (controller, tooltipPosition) =>
+                              SpotlightTooltip(
+                            controller: controller,
+                            position: tooltipPosition,
+                            title: 'FOUR',
+                            description: 'description4',
+                            image: '',
+                            step: spotlightItems.indexOf(_four) + 1,
+                            totalSteps: spotlightItems.length,
+                            arrowDirection: SpotlightTooltipArrowDirection.down,
+                          ),
+                          padding: EdgeInsets.all(8.0),
+                          borderRadius: 10.0,
+                          tooltipVerticalOffset: 10,
                           tooltipHorizontalPosition:
                               SpotlightTooltipHorizontalPosition.alignLeft,
+                          tooltipHorizontalOffset: 2,
                         ),
                         child: Text('Text 4'),
                       ),
@@ -96,15 +132,23 @@ class MainApp extends StatelessWidget {
                       SpotlightItem(
                         key: _five,
                         config: SpotlightItemConfig(
-                          tooltip: (controller) => SpotlightTooltip(
-                              controller: controller,
-                              title: 'FIVE',
-                              description: 'description5',
-                              image: '',
-                              step: 5,
-                              totalSteps: 5),
+                          tooltip: (controller, tooltipPosition) =>
+                              SpotlightTooltip(
+                            controller: controller,
+                            position: tooltipPosition,
+                            title: 'FIVE',
+                            description: 'description5',
+                            image: '',
+                            step: spotlightItems.indexOf(_five) + 1,
+                            totalSteps: spotlightItems.length,
+                            arrowDirection: SpotlightTooltipArrowDirection.down,
+                          ),
+                          padding: EdgeInsets.all(8.0),
+                          borderRadius: 10.0,
+                          tooltipVerticalOffset: 10,
                           tooltipHorizontalPosition:
                               SpotlightTooltipHorizontalPosition.alignRight,
+                          tooltipHorizontalOffset: 2,
                         ),
                         child: Text('Text 5'),
                       ),
@@ -117,8 +161,7 @@ class MainApp extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              // controller.start([_one, _two, _three, _four, _five]);
-              controller.start([_three, _four, _five]);
+              controller.start(spotlightItems);
             },
             child: const Icon(Icons.play_arrow),
           ),
