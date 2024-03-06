@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tutorial_spotlight/spotlight_controller.dart';
 import 'package:tutorial_spotlight/spotlight_item.dart';
 import 'package:tutorial_spotlight/spotlight_holder.dart';
+import 'package:tutorial_spotlight/spotlight_tooltip.dart';
 
 final GlobalKey _one = GlobalKey();
 final GlobalKey _two = GlobalKey();
@@ -29,14 +30,24 @@ class MainApp extends StatelessWidget {
                 children: [
                   SpotlightItem(
                     key: _one,
-                    tooltip: (controller) => Container(
-                      decoration: BoxDecoration(color: Colors.red),
-                    ),
+                    tooltip: (controller) => SpotlightTooltip(
+                        controller: controller,
+                        title: 'ONE',
+                        description: 'description1',
+                        image: '',
+                        step: 1,
+                        totalSteps: 3),
                     child: Text('Text 1'),
                   ),
                   SpotlightItem(
                     key: _two,
-                    tooltip: (controller) => Container(),
+                    tooltip: (controller) => SpotlightTooltip(
+                        controller: controller,
+                        title: 'TWO',
+                        description: 'description2',
+                        image: '',
+                        step: 2,
+                        totalSteps: 3),
                     child: Text('Text 2'),
                   ),
                   SpotlightItem(
