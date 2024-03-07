@@ -5,6 +5,10 @@ class SpotlightController extends ChangeNotifier {
   bool isActive = false;
   SpotlightItemConfig? activeConfig;
   List<GlobalKey> widgetKeys = [];
+  final Function()? onStart;
+  final Function()? onDone;
+
+  SpotlightController({this.onStart, this.onDone});
 
   int currentIndex = 0;
 
@@ -17,24 +21,33 @@ class SpotlightController extends ChangeNotifier {
 
     _updateActive();
 
+    onStart?.call();
+
     notifyListeners();
   }
 
   void dismiss() {
-    widgetKeys = [];
-    isActive = false;
-    notifyListeners();
+    _cleanup();
+    activeConfig?.onDismiss?.call();
   }
 
   void next() {
     if (currentIndex < widgetKeys.length - 1) {
       currentIndex++;
+      activeConfig?.onNext?.call();
       _updateActive();
 
       notifyListeners();
     } else {
-      dismiss();
+      _cleanup();
+      onDone?.call();
     }
+  }
+
+  void _cleanup() {
+    widgetKeys = [];
+    isActive = false;
+    notifyListeners();
   }
 
   void _updateActive() {

@@ -50,6 +50,10 @@ class SpotlightItemConfig {
   /// Default to `true`
   final bool showSpotlight;
 
+  final Function()? onNext;
+
+  final Function()? onDismiss;
+
   const SpotlightItemConfig({
     required this.tooltip,
     this.padding = EdgeInsets.zero,
@@ -59,6 +63,8 @@ class SpotlightItemConfig {
     this.tooltipHorizontalPosition = SpotlightTooltipHorizontalPosition.center,
     this.tooltipHorizontalOffset = 0.0,
     this.showSpotlight = true,
+    this.onNext,
+    this.onDismiss,
   });
 }
 

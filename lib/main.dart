@@ -12,7 +12,10 @@ final GlobalKey _two = GlobalKey();
 final GlobalKey _three = GlobalKey();
 final GlobalKey _four = GlobalKey();
 final GlobalKey _five = GlobalKey();
-final SpotlightController controller = SpotlightController();
+final SpotlightController controller = SpotlightController(
+  onStart: () => print('Started'),
+  onDone: () => print('Done'),
+);
 
 void main() {
   runApp(MainApp());
@@ -94,6 +97,8 @@ class MainApp extends StatelessWidget {
                         padding: EdgeInsets.all(8.0),
                         borderRadius: 10.0,
                         tooltipVerticalOffset: 10,
+                        onNext: () => print('Next'),
+                        onDismiss: () => print('Dismiss'),
                       ),
                       child: Text('Text 2'),
                     ),
