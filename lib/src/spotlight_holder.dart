@@ -66,6 +66,8 @@ class SpotlightHolder extends StatelessWidget {
 
       final topPadding = config.padding.top;
       final bottomPadding = config.padding.bottom;
+      final leftPadding = config.padding.left;
+      final rightPadding = config.padding.right;
       if (isTop) {
         bottom = MediaQuery.of(context).size.height -
             offset.dy +
@@ -80,12 +82,13 @@ class SpotlightHolder extends StatelessWidget {
 
       switch (config.tooltipHorizontalPosition) {
         case SpotlightTooltipHorizontalPosition.alignLeft:
-          left = offset.dx - config.tooltipHorizontalOffset;
+          left = offset.dx - config.tooltipHorizontalOffset - leftPadding;
         case SpotlightTooltipHorizontalPosition.alignRight:
           right = MediaQuery.of(context).size.width -
               size.width -
               offset.dx -
-              config.tooltipHorizontalOffset;
+              config.tooltipHorizontalOffset -
+              rightPadding;
         case SpotlightTooltipHorizontalPosition.center:
           left = config.tooltipHorizontalOffset;
           right = left;

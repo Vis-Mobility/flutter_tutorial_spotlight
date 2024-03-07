@@ -1,5 +1,4 @@
 import 'package:example/tooltip/spotlight_tooltip.dart';
-import 'package:example/tooltip/spotlight_tooltip_arrow.dart';
 import 'package:flutter/material.dart';
 import 'package:tutorial_spotlight/tutorial_spotlight.dart';
 
