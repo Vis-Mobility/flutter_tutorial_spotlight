@@ -54,6 +54,9 @@ class SpotlightItemConfig {
 
   final Function()? onDismiss;
 
+  /// The color to be used as the overlay color when the spotlight is active
+  final Color? overlayColor;
+
   const SpotlightItemConfig({
     required this.tooltip,
     this.padding = EdgeInsets.zero,
@@ -65,6 +68,7 @@ class SpotlightItemConfig {
     this.showSpotlight = true,
     this.onNext,
     this.onDismiss,
+    this.overlayColor,
   });
 }
 

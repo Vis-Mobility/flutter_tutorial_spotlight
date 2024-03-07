@@ -29,6 +29,7 @@ class SpotlightHolder extends StatelessWidget {
                 padding: controller.activeConfig?.padding,
                 borderRadius: controller.activeConfig?.borderRadius,
                 showSpotlight: controller.activeConfig?.showSpotlight ?? true,
+                overlayColor: controller.activeConfig?.overlayColor,
               ),
               if (controller.activeConfig != null)
                 _buildTooltip(context, config: controller.activeConfig!),

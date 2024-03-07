@@ -4,16 +4,15 @@ class SpotlightOverlayPainter extends CustomPainter {
   final Rect rect;
   final EdgeInsets? padding;
   final double? borderRadius;
+  final Color? overlayColor;
 
-  SpotlightOverlayPainter({
-    required this.rect,
-    this.padding,
-    this.borderRadius,
-  });
+  SpotlightOverlayPainter(
+      {required this.rect, this.padding, this.borderRadius, this.overlayColor});
 
   @override
   void paint(Canvas canvas, Size size) {
-    final overlayPaint = Paint()..color = Colors.black.withOpacity(0.7);
+    final overlayPaint = Paint()
+      ..color = overlayColor ?? Colors.black.withOpacity(0.7);
     final radius =
         borderRadius != null ? Radius.circular(borderRadius!) : Radius.zero;
     final edgeInsets = padding != null ? padding! : EdgeInsets.zero;

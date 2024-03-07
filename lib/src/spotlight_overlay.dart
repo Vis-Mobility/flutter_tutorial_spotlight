@@ -7,6 +7,7 @@ class SpotlightOverlay extends StatelessWidget {
   final EdgeInsets? padding;
   final double? borderRadius;
   final bool showSpotlight;
+  final Color? overlayColor;
 
   const SpotlightOverlay({
     Key? key,
@@ -14,6 +15,7 @@ class SpotlightOverlay extends StatelessWidget {
     this.padding,
     this.borderRadius,
     required this.showSpotlight,
+    this.overlayColor,
   }) : super(key: key);
 
   @override
@@ -36,6 +38,7 @@ class SpotlightOverlay extends StatelessWidget {
             rect: Rect.fromLTWH(offset.dx, offset.dy, size.width, size.height),
             padding: padding,
             borderRadius: borderRadius,
+            overlayColor: overlayColor,
           ),
         );
       },
