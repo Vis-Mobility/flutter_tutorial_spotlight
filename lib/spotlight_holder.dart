@@ -41,6 +41,7 @@ class SpotlightHolder extends StatelessWidget {
     );
   }
 
+  /// Builds the tooltip widget based on the current [SpotlightItemConfig].
   Widget _buildTooltip(
     BuildContext context, {
     required SpotlightItemConfig config,
