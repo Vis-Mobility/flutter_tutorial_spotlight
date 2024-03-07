@@ -100,6 +100,7 @@ class SpotlightHolder extends StatelessWidget {
 
       final SpotlightTooltipPosition tooltipPosition = SpotlightTooltipPosition(
         pointTo: pointTo,
+        isTop: isTop,
         left: left,
         top: top,
         right: right,

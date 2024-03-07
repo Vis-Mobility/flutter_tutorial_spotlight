@@ -74,6 +74,7 @@ class SpotlightItemConfig {
 
 class SpotlightTooltipPosition {
   final Offset? pointTo;
+  final bool isTop;
   final double? left;
   final double? top;
   final double? right;
@@ -81,6 +82,7 @@ class SpotlightTooltipPosition {
 
   const SpotlightTooltipPosition({
     this.pointTo,
+    this.isTop = false,
     this.left,
     this.top,
     this.right,

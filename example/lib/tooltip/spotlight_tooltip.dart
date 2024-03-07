@@ -12,7 +12,7 @@ class SpotlightTooltip extends StatelessWidget {
   final bool showSteps;
   final int step;
   final int totalSteps;
-  final SpotlightTooltipArrowDirection arrowDirection;
+  final bool showArrow;
 
   static final Color topBackgroundColor = Colors.blue.shade300;
   static final Color bottomBackgroundColor = Colors.white;
@@ -27,7 +27,7 @@ class SpotlightTooltip extends StatelessWidget {
     this.showSteps = true,
     required this.step,
     required this.totalSteps,
-    this.arrowDirection = SpotlightTooltipArrowDirection.none,
+    this.showArrow = true,
   }) : super(key: key);
 
   @override
@@ -86,12 +86,12 @@ class SpotlightTooltip extends StatelessWidget {
             ),
           ),
         ),
-        if (arrowDirection != SpotlightTooltipArrowDirection.none)
+        if (showArrow)
           IgnorePointer(
             child: SpotlightTooltipArrow(
               pointTo: position.pointTo,
-              direction: arrowDirection,
-              color: _arrowColor(context, arrowDirection),
+              color: _arrowColor(context, position.isTop),
+              pointUp: !position.isTop,
             ),
           ),
       ],
@@ -148,15 +148,11 @@ class SpotlightTooltip extends StatelessWidget {
     );
   }
 
-  Color _arrowColor(
-      BuildContext context, SpotlightTooltipArrowDirection direction) {
-    switch (direction) {
-      case SpotlightTooltipArrowDirection.up:
-        return topBackgroundColor;
-      case SpotlightTooltipArrowDirection.down:
-        return bottomBackgroundColor;
-      case SpotlightTooltipArrowDirection.none:
-        return Colors.transparent;
+  Color _arrowColor(BuildContext context, bool isTop) {
+    if (isTop) {
+      return bottomBackgroundColor;
+    } else {
+      return topBackgroundColor;
     }
   }
 }

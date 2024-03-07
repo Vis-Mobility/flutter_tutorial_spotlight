@@ -69,7 +69,6 @@ class MainApp extends StatelessWidget {
                           image: '',
                           step: spotlightItems.indexOf(_one),
                           totalSteps: spotlightItems.length - 1,
-                          arrowDirection: SpotlightTooltipArrowDirection.up,
                         ),
                         padding: EdgeInsets.all(8.0),
                         borderRadius: 10.0,
@@ -89,7 +88,6 @@ class MainApp extends StatelessWidget {
                           image: '',
                           step: spotlightItems.indexOf(_two),
                           totalSteps: spotlightItems.length - 1,
-                          arrowDirection: SpotlightTooltipArrowDirection.up,
                         ),
                         padding: EdgeInsets.all(8.0),
                         borderRadius: 10.0,
@@ -102,15 +100,15 @@ class MainApp extends StatelessWidget {
                     SpotlightItem(
                       key: _three,
                       config: SpotlightItemConfig(
-                        tooltip: (controller, builder) => SpotlightTooltip(
+                        tooltip: (controller, tooltipPosition) =>
+                            SpotlightTooltip(
                           controller: controller,
-                          position: builder,
+                          position: tooltipPosition,
                           title: 'THREE',
                           description: 'description3',
                           image: '',
                           step: spotlightItems.indexOf(_three),
                           totalSteps: spotlightItems.length - 1,
-                          arrowDirection: SpotlightTooltipArrowDirection.down,
                         ),
                         padding: EdgeInsets.all(8.0),
                         borderRadius: 10.0,
@@ -134,8 +132,6 @@ class MainApp extends StatelessWidget {
                               image: '',
                               step: spotlightItems.indexOf(_four),
                               totalSteps: spotlightItems.length - 1,
-                              arrowDirection:
-                                  SpotlightTooltipArrowDirection.down,
                             ),
                             padding: EdgeInsets.all(8.0),
                             borderRadius: 10.0,
@@ -159,8 +155,6 @@ class MainApp extends StatelessWidget {
                               image: '',
                               step: spotlightItems.indexOf(_five),
                               totalSteps: spotlightItems.length - 1,
-                              arrowDirection:
-                                  SpotlightTooltipArrowDirection.down,
                             ),
                             padding: EdgeInsets.all(8.0),
                             borderRadius: 10.0,
