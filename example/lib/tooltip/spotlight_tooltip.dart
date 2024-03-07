@@ -1,8 +1,7 @@
 import 'package:example/tooltip/spotlight_tooltip_arrow.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:tutorial_spotlight/spotlight_controller.dart';
-import 'package:tutorial_spotlight/spotlight_item.dart';
+import 'package:tutorial_spotlight/tutorial_spotlight.dart';
 
 class SpotlightTooltip extends StatelessWidget {
   final SpotlightController controller;

@@ -1,7 +1,9 @@
-export 'enums.dart';
-export 'spotlight_controller.dart';
-export 'spotlight_holder.dart';
-export 'spotlight_item.dart';
-export 'spotlight_overlay_painter.dart';
-export 'spotlight_overlay.dart';
-export 'widget_position.dart';
+library tutorial_spotlight;
+
+export 'src/enums.dart';
+export 'src/spotlight_controller.dart';
+export 'src/spotlight_holder.dart';
+export 'src/spotlight_item.dart';
+export 'src/spotlight_overlay_painter.dart';
+export 'src/spotlight_overlay.dart';
+export 'src/widget_position.dart';
